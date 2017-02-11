@@ -1,7 +1,5 @@
 package Book.BookAPL;
 
-import Book.BookAPL.Books;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,30 +9,38 @@ import java.util.List;
 public class BookCenter
 {
 
-    private List<Books> books;
+    private List<Books> bookList;
 
     public BookCenter()
     {
-        books = new ArrayList<>();
+        bookList = new ArrayList<>();
     }
 
     public void addBook(Books book)
     {
-        books.add(book);
+        // TODO 아이디를 부여한다.
+
+        // TODO 아이디 부여 규칙은 년월일+인덱스
+
+        bookList.add(book);
     }
 
     public List<Books> getBooks()
     {
-        List<Books> copyBooks=  new ArrayList<>(books);
+        List<Books> copyBooks=  new ArrayList<>(bookList);
         return copyBooks;
     }
 
     public boolean bookremove(String title)
     {
-        Books remove = (Books) findBytitle(title);
-        if(remove != null)
+        List<Books> bytitle = findBytitle (title);
+
+        if (bytitle.size () > 0)
         {
-            return books.remove(remove);
+            for (Books books : bytitle)
+                bookList.remove (books);
+
+            return true;
         }
         else
             return false;
@@ -44,7 +50,7 @@ public class BookCenter
     {
         List<Books>findList=new ArrayList<>();
 
-        for(Books listBook:books)
+        for(Books listBook: bookList)
         {
             String searchKey="";
             if(element.equals("title"))

@@ -4,6 +4,12 @@ package Book.BookAPL;
  * 책 관련 프로퍼티 관리
  */
 public class Books {
+
+    /**
+     * 책의 고유값이 된다.
+     */
+    private String id;
+
     private String title;
     private String writer;
     private String publisher;
@@ -12,6 +18,16 @@ public class Books {
 
     //북 초기화
     public Books(){}
+
+    public String getId ()
+    {
+        return id;
+    }
+
+    public void setId (String id)
+    {
+        this.id = id;
+    }
 
     //책 관련 인자들을 받고 내보낸다.
     public String getTitle() {
