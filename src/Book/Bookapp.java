@@ -1,8 +1,10 @@
 package Book;
 
+import Book.BookAPL.BookCenter;
 import Book.BookMenu;
 import Book.InputMenu;
 import Book.Inputclass;
+import Book.Member.MemberCenter;
 
 /**
  * 메뉴 표출 및 연결
@@ -10,6 +12,9 @@ import Book.Inputclass;
 public class Bookapp
 {
     Inputclass in=new Inputclass();
+
+    BookCenter bc =new BookCenter();
+    MemberCenter mc=new MemberCenter();
 
     public void start()
     {
@@ -26,15 +31,15 @@ public class Bookapp
             {
                 System.out.println("도서 관련");
                 //북관련 메뉴 실행
-                BookMenu bm=new BookMenu();
+                BookMenu bm=new BookMenu(bc);
                 bm.bookMenu();
             }
             else if("2".equals(inputMenu.getMenuCode()))
             {
                 System.out.println("회원 관련");
                 //회원 관련 메뉴 실행
-                MemberMenu mb=new MemberMenu();
-                mb.membermenu();
+                MemberMenu mm=new MemberMenu(mc);
+                mm.membermenu();
             }
         }
 

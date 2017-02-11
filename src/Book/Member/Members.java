@@ -11,37 +11,21 @@ public class Members {
 
     public Members(){}
 
-    public String getName() {
-        return name;
-    }
+    public String getName() {return name;}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public void setName(String name) {this.name = name;}
 
-    public String getId() {
-        return id;
-    }
+    public String getId() {return id;}
 
-    public void setId(String id) {
-        this.id = id;
-    }
+    public void setId(String id) {this.id = id;}
 
-    public String getPhonnumber() {
-        return phonnumber;
-    }
+    public String getPhonnumber() {return phonnumber;}
 
-    public void setPhonnumber(String phonnumber) {
-        this.phonnumber = phonnumber;
-    }
+    public void setPhonnumber(String phonnumber) {this.phonnumber = phonnumber;}
 
-    public String getBirthday() {
-        return birthday;
-    }
+    public String getBirthday() {return birthday;}
 
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
-    }
+    public void setBirthday(String birthday) {this.birthday = birthday;}
 
     public String toString()
     {

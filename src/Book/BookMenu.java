@@ -10,13 +10,18 @@ import Book.BookAPL.BookSearch;
  */
 public class BookMenu
 {
-    BookCenter bc=new BookCenter();
+    BookCenter bc;
+
+    public BookMenu(BookCenter bc){
+        this.bc=bc;
+    }
+
 
     public void bookMenu()
     {
         while(true)
         {
-            System.out.println(bc.books);
+            System.out.println(bc.getBooks());
             System.out.println("============================");
             System.out.println("1. 도서 대여");
             System.out.println("2. 도서 추가");
@@ -33,25 +38,24 @@ public class BookMenu
 
             if (("1").equals(inputMenu.getMenuCode()))
             {
-                BookSearch booksearch=new BookSearch();
-                booksearch.search();
+
             }
             else if (("2").equals(inputMenu.getMenuCode()))
             {
                 System.out.println("추가 할 책을 입력해주세요.(책 이름)");
-                BookInput bookInput=new BookInput();
+                BookInput bookInput=new BookInput(bc);
                 bookInput.input();
             }
             else if (("3").equals(inputMenu.getMenuCode()))
             {
                 System.out.println("삭제 할 책을 입력해주세요.");
-                BookRemove bookRemove=new BookRemove();
+                BookRemove bookRemove=new BookRemove(bc);
                 bookRemove.Remove();
             }
             else if(("4").equals(inputMenu.getMenuCode()))
             {
-                //todo 도서 찾기 메소드
-                System.out.println("빌릴 책을 입력하시오");
+                BookSearch booksearch=new BookSearch(bc);
+                booksearch.search();
             }
         }
     }

@@ -11,7 +11,11 @@ import Book.Inputclass;
 public class BookInput {
 
 
-    BookCenter bc = new BookCenter();
+    BookCenter bc;
+
+    public BookInput(BookCenter bc) {
+        this.bc = bc;
+    }
 
     public void input() {
 
@@ -56,7 +60,7 @@ public class BookInput {
     }
     public boolean addBooks(Books addbook)
     {
-        bc.books.add(addbook);
+        bc.addBook(addbook);
 
         return true;
     }

@@ -11,12 +11,16 @@ import java.lang.reflect.Member;
  */
 public class MemberInput {
 
-    MemberCenter mc =new MemberCenter();
+    MemberCenter mc;
+
+    public MemberInput(MemberCenter mc)
+    {
+        this.mc=mc;
+    }
 
         public void input() {
 
-            //todo 초기화 문제 발생
-            //todo 어느 리스트에 집어넣는지...헷갈림....
+
             while (true) {
 
                 Members members=new Members();
@@ -31,12 +35,6 @@ public class MemberInput {
                 System.out.println("아이디을 입력해주세요");
                 Inputclass inputId = new Inputclass();
                 InputMenu inputMenu2 = inputId.getInputMenu();
-
-                //아이디 중복 확인
-                /* 수정 필요
-                MemberSearch ms=new MemberSearch();
-                ms.findByID(inputMenu2.getMenuCode());
-                */
 
                 members.setId(inputMenu2.getMenuCode());
 
@@ -57,9 +55,9 @@ public class MemberInput {
             }
         }
 
-        public boolean addMembers(Members members)
+        public boolean addMembers(Members addmember)
         {
-            mc.members.add(members);
+            mc.addMembers(addmember);
 
             return true;
         }

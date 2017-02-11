@@ -12,31 +12,14 @@ import java.util.List;
 public class BookRemove {
 
     Books b=new Books();
-    BookCenter bc=new BookCenter();
+    BookCenter bc;
 
-    public void bookremove(String title)
+    public BookRemove(BookCenter bc)
     {
-        Books remove = (Books) findBytitle(title);
-        if(remove != null)
-        {
-            bc.books.remove(remove);
-            System.out.println(title+"가 삭제 되었습니다.");
-        }
-        else
-            System.out.println("그런 책이 없습니다.");
+        this.bc=bc;
     }
 
-    public List<Books> findBytitle(String title)
-    {
-        List<Books>findList=new ArrayList<>();
 
-        for(Books listBook:bc.books)
-        {
-            if(listBook.getTitle().equals(title))
-                findList.add(listBook);
-        }
-        return findList;
-    }
 
     public void Remove()
     {
@@ -45,7 +28,12 @@ public class BookRemove {
             System.out.println("삭제 할 책 제목을 입력해주세요");
             Inputclass in = new Inputclass();
             InputMenu inputMenu = in.getInputMenu();
-            bookremove(inputMenu.getMenuCode());
+            if(bc.bookremove(inputMenu.getMenuCode()))
+                System.out.println(inputMenu.getMenuCode()+"가 삭제 되었습니다.");
+            else
+                System.out.println("그런 책이 없습니다.");
+
+
         }
     }
 
