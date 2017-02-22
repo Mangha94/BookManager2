@@ -27,13 +27,15 @@ public class BookManagerLogin {
             System.out.println("아이디를 입력해주세요.");
             Inputclass in = new Inputclass();
             InputMenu inputMenu2 = in.getInputMenu();
-            if (mc.Login(inputMenu2.getMenuCode())) {
-                System.out.println(inputMenu2.getMenuCode() + "님 어서오세요");
-                app.startForUser();
-            } else if (inputMenu2.getMenuCode().equals("master of master")) {
+            if (inputMenu2.getMenuCode().equals("master of master")) {
                 System.out.println("관리자 등장!!");
                 app.start();
-            } else {
+            }
+            else if (mc.Login(inputMenu2.getMenuCode())) {
+                System.out.println(inputMenu2.getMenuCode() + "님 어서오세요");
+                app.startForUser();
+            }
+            else {
                 System.out.println("존재하지 않는 아이디 입니다.");
             }
         }

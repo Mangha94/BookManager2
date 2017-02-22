@@ -11,8 +11,6 @@ import Book.Member.MemberCenter;
  */
 public class Bookapp
 {
-    Inputclass in=new Inputclass();
-
     BookCenter bc =new BookCenter();
     MemberCenter mc=new MemberCenter();
 
@@ -22,7 +20,7 @@ public class Bookapp
         {
             //초입 메뉴 출력
             titlePrint("도서 관리 프로그램",new String[]{"1.도서 관련","2.회원관련"});
-
+            Inputclass in=new Inputclass();
             InputMenu inputMenu=in.getInputMenu();
 
             if(inputMenu.isBack())
