@@ -3,6 +3,9 @@ package Book.Member;
 import Book.InputMenu;
 import Book.Inputclass;
 
+import java.lang.reflect.Member;
+import java.util.List;
+
 /**
  * 회원 삭제 클래스
  */
@@ -24,12 +27,15 @@ public class MemberRemove {
                 System.out.println("삭제 할 아이디를 입력해주세요");
                 Inputclass in = new Inputclass();
                 InputMenu inputMenu = in.getInputMenu();
-                if(mc.MemberRemove(inputMenu.getMenuCode()))
-                    System.out.println(inputMenu.getMenuCode()+"가 삭제 되었습니다.");
+                if(inputMenu.isBack ())
+                    break;
+                List<Members> memberRemove=mc.findByID(inputMenu.getMenuCode());
+                if(memberRemove.size()==0){
+                    System.out.println("그런 회원없습니다.");
+                }
                 else
-                    System.out.println("그런 책이 없습니다.");
-
-
+                    mc.remove(memberRemove.get(0).getId());
+                    System.out.println("삭제되었습니다.");
             }
         }
 

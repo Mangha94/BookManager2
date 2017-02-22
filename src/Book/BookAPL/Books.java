@@ -1,5 +1,7 @@
 package Book.BookAPL;
 
+import java.util.Date;
+
 /**
  * 책 관련 프로퍼티 관리
  */
@@ -9,6 +11,8 @@ public class Books {
     private String publisher;
     private String price;
     private String classification;
+    private String id;
+    private Date regDate;
 
     //북 초기화
     public Books(){}
@@ -54,14 +58,28 @@ public class Books {
         this.classification = classification;
     }
 
+    public String getId(){return id;}
+
+    public void setId(String id){
+        this.id=id;
+    }
+    public Date getRegDate() {
+        return regDate;
+    }
+
+    public void setRegDate(Date regDate) {
+        this.regDate = regDate;
+    }
+
     public String toString()
     {
-        return "[책제목="+title+'\''+
+        return "[id='"+id+'\''+
+                "책제목='"+title+'\''+
                 "저자='"+writer+'\''+
                 ",출판사='"+publisher+'\''+
                 ",가격='"+price+'\''+
                 ",분류='"+classification+'\''+
-                ']';
+                ']'+"\n";
     }
 
 

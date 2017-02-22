@@ -1,13 +1,17 @@
 package Book.Member;
 
+import java.util.Date;
+
 /**
  * Created by ttinfo on 2017-02-08.
  */
 public class Members {
-    String name;
-    String id;
-    String phonnumber;
-    String birthday;
+    private String name;
+    private String id;
+    private String phonnumber;
+    private String birthday;
+    private Date regDate;
+    private String log;
 
     public Members(){}
 
@@ -27,14 +31,21 @@ public class Members {
 
     public void setBirthday(String birthday) {this.birthday = birthday;}
 
+    public Date getRegDate() {return regDate;}
+
+    public void setRegDate(Date regDate) {this.regDate = regDate;}
+
+    public void setLog(String log){this.log=log;}
+
     public String toString()
     {
         return "["
+                +log
                 +"이름 : " +name
                 +" 아이디 : "+id
                 +" 연락처 : "+phonnumber
                 +" 생년월일 "+birthday
-                +"]";
+                +"\n]";
     }
 
 

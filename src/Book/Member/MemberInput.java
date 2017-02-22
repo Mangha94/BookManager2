@@ -5,6 +5,7 @@ import Book.InputMenu;
 import Book.Inputclass;
 
 import java.lang.reflect.Member;
+import java.util.List;
 
 /**
  * 회원 등록 클래스
@@ -20,23 +21,28 @@ public class MemberInput {
 
         public void input() {
 
+            Members members = new Members();
 
+            //이름을 입력받는다
+            System.out.println("이름을 입력해주세요");
+            Inputclass inputName = new Inputclass();
+            InputMenu inputMenu1 = inputName.getInputMenu();
+            members.setName(inputMenu1.getMenuCode());
+
+            //아이디을 입력받는다
             while (true) {
-
-                Members members=new Members();
-
-                //이름을 입력받는다
-                System.out.println("이름을 입력해주세요");
-                Inputclass inputName = new Inputclass();
-                InputMenu inputMenu1 = inputName.getInputMenu();
-                members.setName(inputMenu1.getMenuCode());
-
-                //아이디을 입력받는다
                 System.out.println("아이디을 입력해주세요");
                 Inputclass inputId = new Inputclass();
                 InputMenu inputMenu2 = inputId.getInputMenu();
 
-                members.setId(inputMenu2.getMenuCode());
+                List<Members> memberId = mc.findByID(inputMenu2.getMenuCode());
+                if (memberId.size() == 0) {
+                    members.setId(inputMenu2.getMenuCode());
+                    System.out.println("사용가능한 아이디 입니다.");
+                    break;
+                } else
+                    System.out.println("중복된 아이디 입니다.");
+            }
 
                 //연락처을 입력받는다
                 System.out.println("연락처를 입력해주세요");
@@ -51,8 +57,7 @@ public class MemberInput {
                 members.setBirthday(inputMenu4.getMenuCode());
 
                 addMembers(members);
-                return;
-            }
+                System.out.println("등록되었습니다.");
         }
 
         public boolean addMembers(Members addmember)
