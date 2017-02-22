@@ -46,6 +46,12 @@ public class Bookapp
         //프로그램 종료시 메세지
         System.out.println("Bye");
     }
+
+    public void startForUser(){
+        System.out.println("도서관리 프로그램");
+        BookMenuForUser ForUser=new BookMenuForUser(bc);
+        ForUser.bookMenuForUser();
+    }
     /**
      * 타이틀을 출력한다.
      * @param title

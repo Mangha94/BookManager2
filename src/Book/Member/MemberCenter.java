@@ -1,5 +1,6 @@
 package Book.Member;
 
+import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +28,7 @@ public class MemberCenter {
         MemberLog ml = new MemberLog();
         ml.memberLog(member);
         memberlist.add(member);
+
     }
 
     public List<Members> search(String element, String keyWord) {
@@ -58,10 +60,10 @@ public class MemberCenter {
         return search("phonnumber", phonnumber);
     }
 
-    public boolean findIdErr(String id) {
+    public boolean Login(String id) {
         for (Members member : memberlist) {
-            if (member.getId().equals(id))
-                return false;
+            if (id.equals(member.getId()))
+                return true;
         }
 
         return true;

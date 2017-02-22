@@ -4,7 +4,6 @@ import Book.BookAPL.BookCenter;
 import Book.BookAPL.BookInput;
 import Book.BookAPL.BookRemove;
 import Book.BookAPL.BookSearch;
-import Book.MemberShip.Membership;
 
 /**
  * 책 관련 클래스 연결 클래스
@@ -39,8 +38,7 @@ public class BookMenu
 
             if (("1").equals(inputMenu.getMenuCode()))
             {
-                Membership ms=new Membership();
-                ms.MemberCheck();
+
             }
             else if (("2").equals(inputMenu.getMenuCode()))
             {
