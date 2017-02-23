@@ -29,12 +29,12 @@ public class MemberRemove {
                 InputMenu inputMenu = in.getInputMenu();
                 if(inputMenu.isBack ())
                     break;
-                List<Members> memberRemove=mc.findByID(inputMenu.getMenuCode());
-                if(memberRemove.size()==0){
+                Members memberRemove=mc.findByID(inputMenu.getMenuCode());
+                if(memberRemove.equals(null)){
                     System.out.println("그런 회원없습니다.");
                 }
                 else
-                    mc.remove(memberRemove.get(0).getId());
+                    mc.remove(memberRemove.getId());
                     System.out.println("삭제되었습니다.");
             }
         }

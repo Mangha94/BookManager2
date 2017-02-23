@@ -12,6 +12,15 @@ public class Members {
     private String birthday;
     private Date regDate;
     private String log;
+    private String pw;
+
+    public String getPw() {
+        return pw;
+    }
+
+    public void setPw(String pw) {
+        this.pw = pw;
+    }
 
     public Members(){}
 

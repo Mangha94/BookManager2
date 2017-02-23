@@ -10,7 +10,7 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String[] args)throws IOException {
-        BookManagerLogin Login=new BookManagerLogin();
-        Login.bookMangerLogin();
+        Bookapp app =new Bookapp();
+        app.start();
     }
 }

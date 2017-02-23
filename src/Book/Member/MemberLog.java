@@ -1,6 +1,5 @@
 package Book.Member;
 
-import java.lang.reflect.Member;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,6 +16,7 @@ public class MemberLog {
         public void MemberLog(MemberCenter mc){
             this.mc=mc;
         }
+
         public void memberLog(Members member){
             member.setRegDate(date);
 

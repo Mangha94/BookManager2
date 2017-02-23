@@ -34,15 +34,19 @@ public class MemberInput {
                 System.out.println("아이디을 입력해주세요");
                 Inputclass inputId = new Inputclass();
                 InputMenu inputMenu2 = inputId.getInputMenu();
-
-                List<Members> memberId = mc.findByID(inputMenu2.getMenuCode());
-                if (memberId.size() == 0) {
+                System.out.println(inputMenu2.getMenuCode());
+                Members memberId = mc.findByID(inputMenu2.getMenuCode());
+                if (memberId.equals(0)) {
                     members.setId(inputMenu2.getMenuCode());
                     System.out.println("사용가능한 아이디 입니다.");
                     break;
                 } else
                     System.out.println("중복된 아이디 입니다.");
             }
+                System.out.println("비밀번호를 입력해주세요");
+                Inputclass inputPw = new Inputclass();
+                InputMenu inputMenu5 = inputPw.getInputMenu();
+                members.setPw(inputMenu5.getMenuCode());
 
                 //연락처을 입력받는다
                 System.out.println("연락처를 입력해주세요");

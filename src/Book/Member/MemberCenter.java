@@ -48,8 +48,13 @@ public class MemberCenter {
         return findList;
     }
 
-    public List<Members> findByID(String id) {
-        return search("id", id);
+    public Members findByID(String id) {
+        for (Members member : memberlist) {
+            if (id.equals(member.getId())) {
+                return member;
+            }
+        }
+        return null;
     }
 
     public List<Members> findByName(String name) {
@@ -58,15 +63,6 @@ public class MemberCenter {
 
     public List<Members> findByPhonNumber(String phonnumber) {
         return search("phonnumber", phonnumber);
-    }
-
-    public boolean Login(String id) {
-        for (Members member : memberlist) {
-            if (id.equals(member.getId()))
-                return true;
-        }
-
-        return true;
     }
 
     public boolean remove(String id) {

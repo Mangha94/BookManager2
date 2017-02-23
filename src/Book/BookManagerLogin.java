@@ -1,47 +1,46 @@
 package Book;
 
+import Book.BookAPL.BookCenter;
+import Book.Login.LoginCenter;
 import Book.Member.MemberCenter;
 import Book.Member.MemberInput;
 
 /**
- * 로그인해서 관리자용 or 일반 유저용 연결
+ * 로그인해서 관리자용 or 일반 유저용 연결 액세스는 패키지 전용이 될수있습니다. 액세스는 비공개가 될수 있습니다
  */
 public class BookManagerLogin {
 
     MemberCenter mc;
-    Bookapp app=new Bookapp();
+    LoginCenter lc;
+    BookCenter bc;
+    BookManagerMenu bmm;
 
-    public void BookManagerLogin(MemberCenter mc){
-        this.mc=mc;
-    }
+    public BookManagerLogin(MemberCenter mc){this.mc=mc;}
+    public BookManagerLogin(LoginCenter lc){this.lc=lc;}
+    public BookManagerLogin (BookCenter bc){this.bc=bc;}
+    public BookManagerLogin (BookManagerMenu bmm){this.bmm=bmm;}
+
     public void bookMangerLogin() {
 
         System.out.println("도서관 프로그램 로그인 서비스");
-        System.out.println("1. 로그인      2.회원신규등록");
 
-        Inputclass inputclass = new Inputclass();
-        InputMenu inputMenu1 = inputclass.getInputMenu();
-
-        if (inputMenu1.getMenuCode().equals("1"))
-        {
             System.out.println("아이디를 입력해주세요.");
             Inputclass in = new Inputclass();
             InputMenu inputMenu2 = in.getInputMenu();
-            if (inputMenu2.getMenuCode().equals("master of master")) {
+            if (inputMenu2.getMenuCode().equals("masterkey")) {
                 System.out.println("관리자 등장!!");
-                app.start();
+                bmm.managerMenu();
+
             }
-            else if (mc.Login(inputMenu2.getMenuCode())) {
+            else if (lc.login(inputMenu2.getMenuCode(),"")) {
                 System.out.println(inputMenu2.getMenuCode() + "님 어서오세요");
-                app.startForUser();
+                BookMenuForUser bmf=new BookMenuForUser(bc);
+                bmf.bookMenuForUser();
             }
             else {
                 System.out.println("존재하지 않는 아이디 입니다.");
+                MemberInput mi=new MemberInput(mc);
+                mi.input();
             }
         }
-        else if(inputMenu1.getMenuCode().equals("2")){
-            MemberInput memberInput=new MemberInput(mc);
-            memberInput.input();
-        }
     }
-}
