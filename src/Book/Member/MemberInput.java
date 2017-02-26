@@ -21,17 +21,18 @@ public class MemberInput {
 
             System.out.println ("회원을 신규 등록합니다");
 
+			Inputclass input = new Inputclass();
+
             //이름을 입력받는다
             System.out.println("이름을 입력해주세요");
-            Inputclass inputName = new Inputclass();
-            InputMenu inputMenu1 = inputName.getInputMenu();
+            InputMenu inputMenu1 = input.getInputMenu();
             members.setName(inputMenu1.getMenuCode());
 
             //아이디을 입력받는다
             while (true) {
                 System.out.println("아이디을 입력해주세요");
-                Inputclass inputId = new Inputclass();
-                InputMenu inputMenu2 = inputId.getInputMenu();
+
+                InputMenu inputMenu2 = input.getInputMenu();
                 System.out.println(inputMenu2.getMenuCode());
 
                 Members memberId = mc.findByID(inputMenu2.getMenuCode());
@@ -43,25 +44,25 @@ public class MemberInput {
                 } else
                     System.out.println("중복된 아이디 입니다.");
             }
-                System.out.println("비밀번호를 입력해주세요");
-                Inputclass inputPw = new Inputclass();
-                InputMenu inputMenu5 = inputPw.getInputMenu();
-                members.setPw(inputMenu5.getMenuCode());
 
-                //연락처을 입력받는다
-                System.out.println("연락처를 입력해주세요");
-                Inputclass inputPhonnumber = new Inputclass();
-                InputMenu inputMenu3 = inputPhonnumber.getInputMenu();
-                members.setPhonnumber(inputMenu3.getMenuCode());
+			System.out.println("비밀번호를 입력해주세요");
 
-                //생년월일을 입력받는다
-                System.out.println("생년월일을 입력해주세요");
-                Inputclass inputBirthday = new Inputclass();
-                InputMenu inputMenu4 = inputBirthday.getInputMenu();
-                members.setBirthday(inputMenu4.getMenuCode());
+			InputMenu inputMenu5 = input.getInputMenu();
+			members.setPw(inputMenu5.getMenuCode());
 
-                addMembers(members);
-                System.out.println("등록되었습니다.");
+			//연락처을 입력받는다
+			System.out.println("연락처를 입력해주세요");
+			InputMenu inputMenu3 = input.getInputMenu();
+			members.setPhonnumber(inputMenu3.getMenuCode());
+
+			//생년월일을 입력받는다
+			System.out.println("생년월일을 입력해주세요");
+
+			InputMenu inputMenu4 = input.getInputMenu();
+			members.setBirthday(inputMenu4.getMenuCode());
+
+			addMembers(members);
+			System.out.println("등록되었습니다.");
         }
 
         public boolean addMembers(Members addmember)

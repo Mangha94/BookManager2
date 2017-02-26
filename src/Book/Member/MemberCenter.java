@@ -33,7 +33,7 @@ public class MemberCenter {
     public List<Members> search(String element, String keyWord) {
         List<Members> findList = new ArrayList<>();
         for (Members listMember : memberlist) {
-            //todo id중복체크
+            // id중복체크
             String searchKey = "";
             if (element.equals("id"))
                 searchKey = listMember.getId();

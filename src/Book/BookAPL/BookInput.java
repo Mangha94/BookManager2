@@ -1,15 +1,7 @@
 package Book.BookAPL;
 
-import Book.BookAPL.BookCenter;
-import Book.BookAPL.Books;
 import Book.InputMenu;
 import Book.Inputclass;
-import javafx.scene.input.DataFormat;
-
-import java.text.DateFormat;
-import java.text.Format;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * 책을 등록하는 클래스
@@ -24,7 +16,7 @@ public class BookInput {
     }
     public void input() {
 
-        //todo 초기화 문제 발생
+        // 초기화 문제 발생
         while (true) {
 
             Books book = new Books();
