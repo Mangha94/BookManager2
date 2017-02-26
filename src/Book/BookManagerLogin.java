@@ -15,10 +15,12 @@ public class BookManagerLogin {
     BookCenter bc;
     BookManagerMenu bmm;
 
-    public BookManagerLogin(MemberCenter mc){this.mc=mc;}
-    public BookManagerLogin(LoginCenter lc){this.lc=lc;}
-    public BookManagerLogin (BookCenter bc){this.bc=bc;}
-    public BookManagerLogin (BookManagerMenu bmm){this.bmm=bmm;}
+    public BookManagerLogin(LoginCenter lc, MemberCenter mc, BookCenter bc)
+    {
+        this.lc=lc;
+        this.mc = mc;
+        this.bc = bc;
+    }
 
     public void bookMangerLogin() {
 

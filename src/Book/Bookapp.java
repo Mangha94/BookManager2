@@ -1,9 +1,6 @@
 package Book;
 
 import Book.BookAPL.BookCenter;
-import Book.BookMenu;
-import Book.InputMenu;
-import Book.Inputclass;
 import Book.Login.LoginCenter;
 import Book.Member.MemberCenter;
 
@@ -12,18 +9,21 @@ import Book.Member.MemberCenter;
  */
 public class Bookapp
 {
-    BookCenter bc=new BookCenter();
-    MemberCenter mc=new MemberCenter();
-    LoginCenter lc=new LoginCenter(mc);
-    BookManagerLogin bm=new BookManagerLogin(lc);
+	BookCenter bc = new BookCenter ();
+	MemberCenter mc = new MemberCenter ();
+	LoginCenter lc = new LoginCenter (mc);
+	BookManagerLogin bm = new BookManagerLogin (lc, mc, bc);
 
-    public void start() {
+	public void start ()
+	{
 
-        if (!lc.isLogin()) {
-            bm.bookMangerLogin();
-            if (!lc.isLogin()) {
-                return;
-            }
-        }
-    }
+		if (!lc.isLogin ())
+		{
+			bm.bookMangerLogin ();
+			if (!lc.isLogin ())
+			{
+				return;
+			}
+		}
+	}
 }

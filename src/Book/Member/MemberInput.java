@@ -1,11 +1,7 @@
 package Book.Member;
 
-import Book.BookAPL.BookSearch;
 import Book.InputMenu;
 import Book.Inputclass;
-
-import java.lang.reflect.Member;
-import java.util.List;
 
 /**
  * 회원 등록 클래스
@@ -23,6 +19,8 @@ public class MemberInput {
 
             Members members = new Members();
 
+            System.out.println ("회원을 신규 등록합니다");
+
             //이름을 입력받는다
             System.out.println("이름을 입력해주세요");
             Inputclass inputName = new Inputclass();
@@ -35,8 +33,10 @@ public class MemberInput {
                 Inputclass inputId = new Inputclass();
                 InputMenu inputMenu2 = inputId.getInputMenu();
                 System.out.println(inputMenu2.getMenuCode());
+
                 Members memberId = mc.findByID(inputMenu2.getMenuCode());
-                if (memberId.equals(0)) {
+
+                if (memberId == null) {
                     members.setId(inputMenu2.getMenuCode());
                     System.out.println("사용가능한 아이디 입니다.");
                     break;

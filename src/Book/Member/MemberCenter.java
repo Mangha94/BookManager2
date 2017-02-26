@@ -1,6 +1,5 @@
 package Book.Member;
 
-import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,6 +47,11 @@ public class MemberCenter {
         return findList;
     }
 
+    /**
+     * 아이디로 회원을 찾는다.
+     * @param id 회원 아이디
+     * @return 회원을 찾았다면 회원 객체를 리턴하고, 찾지 못했다면 null 을 리턴한다.
+     */
     public Members findByID(String id) {
         for (Members member : memberlist) {
             if (id.equals(member.getId())) {
