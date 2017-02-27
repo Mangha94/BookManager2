@@ -16,7 +16,7 @@ public class Bookapp
 
 	public void start ()
 	{
-
+		bc.books();
 		if (!lc.isLogin ())
 		{
 			bm.bookMangerLogin ();

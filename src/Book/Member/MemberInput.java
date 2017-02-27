@@ -37,7 +37,7 @@ public class MemberInput {
 
                 Members memberId = mc.findByID(inputMenu2.getMenuCode());
 
-                if (memberId == null) {
+                if (memberId==null) {
                     members.setId(inputMenu2.getMenuCode());
                     System.out.println("사용가능한 아이디 입니다.");
                     break;

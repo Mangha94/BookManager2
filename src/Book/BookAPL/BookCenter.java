@@ -1,11 +1,6 @@
 package Book.BookAPL;
 
-import Book.BookAPL.Books;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,24 +13,63 @@ public class BookCenter
     private List<Books> booklist;
     BookIdAdd IdAdd=new BookIdAdd();
 
+
+    /**
+     * 책장부를 생성
+     */
     public BookCenter()
     {
         booklist = new ArrayList<>();
     }
 
+    /**
+     * 책 고유 아이디를 생성한다
+     * @param book
+     */
     public void addBook(Books book)
     {
             IdAdd.bookIdAdd(book);
             booklist.add(book);
 
     }
+    public void books(){
+        Books book1=new Books();
+        book1.setId("0001");
+        book1.setPublisher("디즈니");
+        book1.setClassification("동화");
+        book1.setPrice("1000");
+        book1.setRented(true);
+        book1.setTitle("백설공주");
+        book1.setWriter("월트 디즈니");
+        booklist.add(book1);
 
+        Books book2=new Books();
+        book2.setId("0002");
+        book2.setPublisher("디즈니");
+        book2.setClassification("동화");
+        book2.setPrice("2000");
+        book2.setRented(true);
+        book2.setTitle("신데렐라");
+        book2.setWriter("월트 디즈니");
+        booklist.add(book2);
+
+    }
+
+    /**
+     * 책장부의 복사본을 표출 본 장부는 감출필요가 있음
+     * @return
+     */
     public List<Books> getBooks()
     {
         List<Books> copyBooks=  new ArrayList<>(booklist);
         return copyBooks;
     }
 
+    /**
+     * 책의 제목을 찾아 지운다
+     * @param removetitle
+     * @return 지워지면 true
+     */
     public boolean bookremove(String removetitle)
     {
         for(Books removeList:booklist) {
@@ -45,6 +79,11 @@ public class BookCenter
         return true;
     }
 
+    /**
+     * 책의 고유 id을 찾아 지운다
+     * @param id
+     * @return
+     */
     public boolean remove(String id){
         for(Books book:booklist){
             if(id.equals(book.getId())) {
@@ -55,6 +94,12 @@ public class BookCenter
         return false;
     }
 
+    /**
+     * 각각 책의 제목 작자 아이디 출판사를 검색할수 있게 한다
+     * @param element
+     * @param keyWord
+     * @return
+     */
     private List<Books> search(String element,String keyWord)
     {
         List<Books>findList=new ArrayList<>();
@@ -75,6 +120,7 @@ public class BookCenter
         }
         return findList;
     }
+    //제목으로 찾기
     public List<Books> findBytitle(String title)
     {
         return search("title",title);
@@ -93,4 +139,16 @@ public class BookCenter
     }
     //아이디로 찾기
     public List<Books>findById(String id){return search("id",id);}
+
+    //책이 빌려갔다는 메소드
+    public void borrowBook(String id){
+        for(Books borrow :booklist){
+            if(id.equals(borrow.getId())){
+                borrow.setRented(false);
+            }
+        }
+    }
+
+
 }
+

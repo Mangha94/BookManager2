@@ -23,7 +23,6 @@ public class BookMenu
         {
             System.out.println(bc.getBooks());
             System.out.println("============================");
-            System.out.println("1. 도서 대여");
             System.out.println("2. 도서 추가");
             System.out.println("3. 도서 삭제");
             System.out.println("4. 도서 찾기");
@@ -38,20 +37,16 @@ public class BookMenu
 
             if (("1").equals(inputMenu.getMenuCode()))
             {
-
-            }
-            else if (("2").equals(inputMenu.getMenuCode()))
-            {
                 System.out.println("추가 할 책을 입력해주세요.(책 이름)");
                 BookInput bookInput=new BookInput(bc);
                 bookInput.input();
             }
-            else if (("3").equals(inputMenu.getMenuCode()))
+            else if (("2").equals(inputMenu.getMenuCode()))
             {
                 BookRemove bookRemove=new BookRemove(bc);
                 bookRemove.Remove();
             }
-            else if(("4").equals(inputMenu.getMenuCode()))
+            else if(("3").equals(inputMenu.getMenuCode()))
             {
                 BookSearch booksearch=new BookSearch(bc);
                 booksearch.search();
