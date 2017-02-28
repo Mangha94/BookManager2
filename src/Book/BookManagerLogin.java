@@ -23,8 +23,8 @@ public class BookManagerLogin {
         this.bc = bc;
 
         mi = new MemberInput(mc);
-        bmf= new BookMenuForUser(bc);
-        bmm=new BookManagerMenu(bc);
+        bmf= new BookMenuForUser(bc,lc);
+        bmm=new BookManagerMenu(bc,lc);
     }
 
 
@@ -37,27 +37,24 @@ public class BookManagerLogin {
 
             System.out.println("1. 로그인      2.신규등록");
 
-            while(true){
-
-                InputMenu inputMenu1 = in.getInputMenu();
-                if (inputMenu1.getMenuCode().equals("1")) {
-                    System.out.println("아이디를 입력해주세요.");
-                    InputMenu inputMenu2 = in.getInputMenu();
+            InputMenu inputMenu1 = in.getInputMenu();
+            if (inputMenu1.getMenuCode().equals("1")) {
+                System.out.println("아이디를 입력해주세요.");
+                InputMenu inputMenu2 = in.getInputMenu();
+                System.out.println("비밀번호를 입력해주세요.");
+                InputMenu inputMenu3=in.getInputMenu();
                     if (inputMenu2.getMenuCode().equals("masterkey")) {
                         System.out.println("관리자 등장!!");
                         bmm.managerMenu();
-                    } else if (lc.login(inputMenu2.getMenuCode(), "")) {
+                    } else if (lc.login(inputMenu2.getMenuCode(),inputMenu3.getMenuCode())) {
                         System.out.println(inputMenu2.getMenuCode() + "님 어서오세요");
                         bmf.bookMenuForUser();
                     } else {
                         System.out.println("존재하지 않는 아이디 입니다.");
-                        mi.input();
                     }
                 }
                 else if (inputMenu1.getMenuCode().equals("2")) {
                     mi.input();
-                    bmf.bookMenuForUser();
-                }
             }
         }
     }

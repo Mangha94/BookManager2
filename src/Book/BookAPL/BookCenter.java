@@ -38,7 +38,7 @@ public class BookCenter
         book1.setPublisher("디즈니");
         book1.setClassification("동화");
         book1.setPrice("1000");
-        book1.setRented(true);
+        book1.setRented(false);
         book1.setTitle("백설공주");
         book1.setWriter("월트 디즈니");
         booklist.add(book1);
@@ -48,7 +48,7 @@ public class BookCenter
         book2.setPublisher("디즈니");
         book2.setClassification("동화");
         book2.setPrice("2000");
-        book2.setRented(true);
+        book2.setRented(false);
         book2.setTitle("신데렐라");
         book2.setWriter("월트 디즈니");
         booklist.add(book2);
@@ -144,11 +144,17 @@ public class BookCenter
     public void borrowBook(String id){
         for(Books borrow :booklist){
             if(id.equals(borrow.getId())){
+                borrow.setRented(true);
+            }
+        }
+    }
+    public void ReturnBook(String id){
+        for(Books borrow :booklist){
+            if(id.equals(borrow.getId())){
                 borrow.setRented(false);
             }
         }
     }
-
 
 }
 

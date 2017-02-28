@@ -1,6 +1,7 @@
 package Book;
 
 import Book.BookAPL.BookCenter;
+import Book.Login.LoginCenter;
 import Book.Member.MemberCenter;
 
 /**
@@ -10,12 +11,10 @@ public class BookManagerMenu {
 
     BookCenter bc;
     MemberCenter mc;
-
-    public BookManagerMenu(BookCenter bc){
+    LoginCenter lc;
+    public BookManagerMenu(BookCenter bc, LoginCenter lc){
         this.bc=bc;
-    }
-    public BookManagerMenu(MemberCenter mc){
-        this.mc=mc;
+        this.lc=lc;
     }
     public void managerMenu() {
         while (true) {
@@ -29,7 +28,7 @@ public class BookManagerMenu {
             if ("1".equals(inputMenu.getMenuCode())) {
                 System.out.println("도서 관련");
                 //북관련 메뉴 실행
-                BookMenu bm = new BookMenu(bc);
+                BookMenu bm = new BookMenu(bc,lc);
                 bm.bookMenu();
             } else if ("2".equals(inputMenu.getMenuCode())) {
                 System.out.println("회원 관련");

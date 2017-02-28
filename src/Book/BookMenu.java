@@ -4,6 +4,8 @@ import Book.BookAPL.BookCenter;
 import Book.BookAPL.BookInput;
 import Book.BookAPL.BookRemove;
 import Book.BookAPL.BookSearch;
+import Book.Borrow.BorrowCenter;
+import Book.Login.LoginCenter;
 
 /**
  * 책 관련 클래스 연결 클래스
@@ -11,9 +13,10 @@ import Book.BookAPL.BookSearch;
 public class BookMenu
 {
     BookCenter bc;
-
-    public BookMenu(BookCenter bc){
+    LoginCenter lc;
+    public BookMenu(BookCenter bc,LoginCenter lc){
         this.bc=bc;
+        this.lc=lc;
     }
 
 
@@ -23,9 +26,10 @@ public class BookMenu
         {
             System.out.println(bc.getBooks());
             System.out.println("============================");
-            System.out.println("2. 도서 추가");
-            System.out.println("3. 도서 삭제");
-            System.out.println("4. 도서 찾기");
+            System.out.println("1. 도서 추가");
+            System.out.println("2. 도서 삭제");
+            System.out.println("3. 도서 찾기");
+            System.out.println("4. 총 대여목록");
 
             Inputclass in=new Inputclass();
 
@@ -50,6 +54,10 @@ public class BookMenu
             {
                 BookSearch booksearch=new BookSearch(bc);
                 booksearch.search();
+            }else if(("4").equals(inputMenu.getMenuCode()))
+            {
+                BorrowCenter br=new BorrowCenter(bc,lc);
+                br.getBorrowList();
             }
         }
     }

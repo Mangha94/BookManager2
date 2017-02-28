@@ -9,11 +9,12 @@ import Book.Member.Members;
  */
 public class LoginCenter {
 
-    LoginInfo loginInfo=new LoginInfo();
+    LoginInfo loginInfo;
     MemberCenter mc;
 
     public LoginCenter(MemberCenter mc){
         this.mc=mc;
+        loginInfo=new LoginInfo();
     }
 
     //로그인 여부를 넘겨준다.

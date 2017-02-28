@@ -3,16 +3,20 @@ package Book.Borrow;
 import Book.BookAPL.BookCenter;
 import Book.InputMenu;
 import Book.Inputclass;
+import Book.Login.LoginCenter;
+import Book.Login.LoginInfo;
 
 /**
  * 책 빌리기 ui
  */
-public class BorrowBooks {
+public class BorrowBook {
     BookCenter bc;
     BorrowCenter br;
-    public BorrowBooks(BookCenter bc){
+    LoginCenter lc;
+    public BorrowBook(BookCenter bc,LoginCenter lc,BorrowCenter br){
         this.bc=bc;
-        br=new BorrowCenter(bc);
+        this.lc=lc;
+        this.br=br;
     }
     Inputclass in=new Inputclass();
 

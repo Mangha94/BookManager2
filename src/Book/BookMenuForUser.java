@@ -2,16 +2,23 @@ package Book;
 
 import Book.BookAPL.BookCenter;
 import Book.BookAPL.BookSearch;
-import Book.Borrow.BorrowBooks;
+import Book.Borrow.BorrowBook;
 import Book.Borrow.BorrowCenter;
+import Book.Borrow.ReturnBook;
+import Book.Login.LoginCenter;
+import Book.Login.LoginInfo;
 
 /**
  * Created by ttinfo on 2017-02-22.
  */
 public class BookMenuForUser {
     BookCenter bc;
-    public BookMenuForUser(BookCenter bc){
+    LoginCenter lc;
+    BorrowCenter br;
+    public BookMenuForUser(BookCenter bc,LoginCenter lc){
         this.bc=bc;
+        this.lc=lc;
+        br=new BorrowCenter(bc,lc);
     }
 
     public void bookMenuForUser()
@@ -22,6 +29,7 @@ public class BookMenuForUser {
             System.out.println("1. 도서 대여");
             System.out.println("2. 도서 찾기");
             System.out.println("3. 빌린 목록");
+            System.out.println("4. 반납 하기");
 
             Inputclass in=new Inputclass();
 
@@ -33,8 +41,7 @@ public class BookMenuForUser {
 
             if (("1").equals(inputMenu.getMenuCode()))
             {
-                //todo 책 대여 메소드
-                BorrowBooks bb=new BorrowBooks(bc);
+                BorrowBook bb=new BorrowBook(bc,lc,br);
                 bb.borrowBooks();
             }
             else if(("2").equals(inputMenu.getMenuCode()))
@@ -43,8 +50,11 @@ public class BookMenuForUser {
                 booksearch.search();
             }else if(("3").equals(inputMenu.getMenuCode()))
             {
-                BorrowCenter br=new BorrowCenter(bc);
-                br.getBorrowList();
+                br.getUserBorrowList();
+            }else if(("4").equals(inputMenu.getMenuCode()))
+            {
+                ReturnBook returnBook=new ReturnBook(br,lc);
+                returnBook.returnBook();
             }
         }
     }
