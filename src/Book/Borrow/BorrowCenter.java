@@ -5,6 +5,7 @@ import Book.BookAPL.Books;
 import Book.Login.LoginCenter;
 import Book.Login.LoginInfo;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -98,6 +99,42 @@ public class BorrowCenter {
         }
         return false;
     }
+
+    /**
+     * 대여가능 책의 갯수를 5개로 제한
+     * @return
+     */
+    public boolean limitBorrow(){
+        for(Borrows borrows:borrowList){
+            if(borrowList.size()==5){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 연체 인지 정상 반납인지 판단
+     * 대여일부터 3일 지체면 연체
+     * 일수로 계산(Day단위)
+     */
+    public boolean overdue(){
+        Borrows borrows=new Borrows();
+        Date borrowDate = borrows.getRentDate();
+        Date returnDate = new Date();
+        double diff = Math.floor((returnDate.getTime() - borrowDate.getTime()) / (24 * 60 * 60 * 1000));
+        if(diff<=3){
+            //정상 반납
+            return false;
+        }
+        else {
+            //연체
+            int LateFee=((int)diff-3)*1000;
+            return true;
+        }
+    }
+
+
 
 
 }

@@ -28,7 +28,12 @@ public class BorrowBook {
         System.out.println("빌릴책 아이디를 입력해주세요");
 
         InputMenu inputMenu1=in.getInputMenu();
-        br.borrow(inputMenu1.getMenuCode());
-        System.out.println(bc.findById(inputMenu1.getMenuCode())+"를 대여완료하였습니다.");
+        if(br.limitBorrow()) {
+            br.borrow(inputMenu1.getMenuCode());
+            System.out.println(bc.findById(inputMenu1.getMenuCode()) + "를 대여완료하였습니다.");
+        }
+        else{
+            System.out.println("빌릴 수 있는 한도를 초과 하였습니다");
+        }
     }
 }
