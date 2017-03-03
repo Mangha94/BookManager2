@@ -16,6 +16,34 @@ public class Borrows {
     private String borrwer;
     private Date rentDate;
 
+    private boolean overDue;
+    private int overDuePrice;
+    private boolean recvOverDue;
+
+    public boolean isOverDue() {
+        return overDue;
+    }
+
+    public void setOverDue(boolean overDue) {
+        this.overDue = overDue;
+    }
+
+    public int getOverDuePrice() {
+        return overDuePrice;
+    }
+
+    public void setOverDuePrice(int overDuePrice) {
+        this.overDuePrice = overDuePrice;
+    }
+
+    public boolean isRecvOverDue() {
+        return recvOverDue;
+    }
+
+    public void setRecvOverDue(boolean recvOverDue) {
+        this.recvOverDue = recvOverDue;
+    }
+
     public Date getRentDate() {
         return rentDate;
     }
@@ -24,7 +52,11 @@ public class Borrows {
         this.rentDate = rentDate;
     }
 
-    public Borrows(){}
+    public Borrows(){
+        overDue=false;
+        recvOverDue=false;
+        overDuePrice=0;
+    }
 
     public String getBorrwer() {
         return borrwer;

@@ -1,7 +1,6 @@
 package Book.BookAPL;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * 책 장부를 구성한다
@@ -11,6 +10,7 @@ public class BookCenter
 
     //todo 싱글턴(인스턴스
     private List<Books> booklist;
+    private HashMap bookmap;
     BookIdAdd IdAdd=new BookIdAdd();
 
 
@@ -20,6 +20,7 @@ public class BookCenter
     public BookCenter()
     {
         booklist = new ArrayList<>();
+        bookmap=new HashMap();
     }
 
     /**
@@ -149,12 +150,50 @@ public class BookCenter
         }
     }
     public void ReturnBook(String id){
-        for(Books borrow :booklist){
-            if(id.equals(borrow.getId())){
-                borrow.setRented(false);
+        for(Books books :booklist){
+            if(id.equals(books.getId())){
+                books.setRented(false);
             }
         }
     }
+    /**
+     * 분류별로 보여주기(HashMap)
+     * @param classification
+     */
+    public HashMap phoneBook=new HashMap();
+
+    public void addClassification(String classification){
+        if(!bookmap.containsKey(classification))
+            bookmap.put(classification,new HashMap());
+    }
+    public void addBookNo(String classification,String title,String writer,String publisher,String price,String id){
+        addClassification(classification);
+        HashMap group=(HashMap)bookmap.get(classification);
+        group.put(id,title);
+    }
+
+    public void printList(){
+        Set set =phoneBook.entrySet();
+        Iterator it=set.iterator();
+
+        while(it.hasNext()){
+            Map.Entry e=(Map.Entry)it.next();
+
+            Set subSet=((HashMap)e.getValue()).entrySet();
+            Iterator subIt=subSet.iterator();
+
+            System.out.println("*"+e.getKey()+"["+subSet.size()+"]");
+
+            while(subIt.hasNext()){
+                Map.Entry subE=(Map.Entry)subIt.next();
+                String telNo=(String)subE.getKey();
+                String name=(String)subE.getValue();
+                System.out.println(name+""+telNo);
+            }
+            System.out.println();
+        }
+    }
+
 
 }
 

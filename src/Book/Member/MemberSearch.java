@@ -31,7 +31,7 @@ public class MemberSearch {
                 System.out.println("아이디를 입력해주세요");
                 Inputclass inputId = new Inputclass();
                 InputMenu inputMenu1 = inputId.getInputMenu();
-                System.out.println(mc.findByID(inputMenu1.getMenuCode()));
+                System.out.println(mc.findByMemberID(inputMenu1.getMenuCode()));
             }
             else if (("2").equals(inputMenu.getMenuCode()))
             {

@@ -5,8 +5,8 @@ import Book.BookAPL.Books;
 import Book.Login.LoginCenter;
 import Book.Login.LoginInfo;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class BorrowCenter {
     public BorrowCenter(BookCenter bc,LoginCenter lc){
         this.bc=bc;
         this.lc=lc;
-        loginInfo=new LoginInfo();
+        loginInfo=lc.getLoginInfo();
         borrowList=new ArrayList<>();
     }
     /**
@@ -45,8 +45,14 @@ public class BorrowCenter {
                     borrows.setClassification(borrowBook.getClassification());
                     borrows.setId(borrowBook.getId());
                     borrows.setRented(true);
-                    borrows.setRentDate(new Date());
-                    borrows.setBorrwer(loginInfo.getLoginId());
+
+                    Calendar instance = Calendar.getInstance();
+
+                    instance.add(Calendar.DATE,-30);
+
+                    //borrows.setRentDate(new Date());
+                    borrows.setRentDate(instance.getTime());
+                    borrows.setBorrwer(lc.getLoginMemberId());
 
                     borrowList.add(borrows);
                     bc.borrowBook(id);
@@ -64,7 +70,7 @@ public class BorrowCenter {
      * 관리자용
      * @return
      */
-    public List<Borrows>getBorrowList(){
+    public List<Borrows> getBorrowList(){
         List<Borrows> borrowBookList=new ArrayList<>(borrowList);
         return borrowBookList;
     }
@@ -74,28 +80,44 @@ public class BorrowCenter {
      * 일반 유저용
      * @return
      */
-    public List<Borrows>getUserBorrowList(){
-        List<Borrows> borrowBookList = new ArrayList<>();
-        for(Borrows borrows : borrowList) {
+    public List<Borrows> getUserBorrowList(){
+        List<Borrows> borrowUserBookList = new ArrayList<>();
+        for(Borrows borrows : borrowList){
             if (borrows.getBorrwer().equals(loginInfo.getLoginId())) {
-                borrowBookList.add(borrows);
+                borrowUserBookList.add(borrows);
             }
         }
-        return borrowBookList;
+        return borrowUserBookList;
     }
 
     /**
      * 아이디로 찾아서 반납한다
-     * @param id
      * @return 대여중 상태를 대여가능 상태로 바꾼다
      */
-    public boolean Return(String id){
-        for(Borrows returnBook:borrowList){
-            if(id.equals(returnBook.getId()) && returnBook.getBorrwer().equals(loginInfo.getLoginId())){
-                bc.ReturnBook(id);
-                returnBook.setRented(false);
-                return true;
+    public boolean returnWork(Borrows borrows) throws ReturnBorrowException {
+
+        if (!borrows.getBorrwer().equals(lc.getLoginInfo().getLoginId()))
+            return false;
+
+        calcOverdue(borrows);
+
+        if(borrows.isOverDue()){
+            if(!borrows.isRecvOverDue()){
+                //연체료가 발생했는데 못받음
+                throw new ReturnBorrowException("연체료가 발생하였습니다.",borrows);
             }
+        }
+
+        bc.ReturnBook(borrows.getId());
+        borrows.setRented(false);
+        return true;
+    }
+
+    public boolean returnWork(String id) throws ReturnBorrowException {
+        for (Borrows b : getUserBorrowList())
+        {
+            if (id.equals(b.getId()))
+                return returnWork(b);
         }
         return false;
     }
@@ -105,12 +127,11 @@ public class BorrowCenter {
      * @return
      */
     public boolean limitBorrow(){
-        for(Borrows borrows:borrowList){
-            if(borrowList.size()==5){
+            if(getUserBorrowList().size()>=5){
                 return false;
             }
-        }
-        return true;
+            else
+                return true;
     }
 
     /**
@@ -118,23 +139,19 @@ public class BorrowCenter {
      * 대여일부터 3일 지체면 연체
      * 일수로 계산(Day단위)
      */
-    public boolean overdue(){
-        Borrows borrows=new Borrows();
+    private void calcOverdue(Borrows borrows){
         Date borrowDate = borrows.getRentDate();
         Date returnDate = new Date();
         double diff = Math.floor((returnDate.getTime() - borrowDate.getTime()) / (24 * 60 * 60 * 1000));
         if(diff<=3){
             //정상 반납
-            return false;
+            borrows.setOverDue(false);
         }
         else {
             //연체
             int LateFee=((int)diff-3)*1000;
-            return true;
+            borrows.setOverDue(true);
+            borrows.setOverDuePrice(LateFee);
         }
     }
-
-
-
-
 }

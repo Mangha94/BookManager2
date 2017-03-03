@@ -7,7 +7,7 @@ import java.util.Date;
  */
 public class Members {
     private String name;
-    private String id;
+    private String memberId;
     private String phonnumber;
     private String birthday;
     private Date regDate;
@@ -28,9 +28,9 @@ public class Members {
 
     public void setName(String name) {this.name = name;}
 
-    public String getId() {return id;}
+    public String getMemberId() {return memberId;}
 
-    public void setId(String id) {this.id = id;}
+    public void setMemberId(String memberId) {this.memberId = memberId;}
 
     public String getPhonnumber() {return phonnumber;}
 
@@ -51,7 +51,7 @@ public class Members {
         return "["
                 +log
                 +"이름 : " +name
-                +" 아이디 : "+id
+                +" 아이디 : "+memberId
                 +" 연락처 : "+phonnumber
                 +" 생년월일 "+birthday
                 +"\n]";

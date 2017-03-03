@@ -35,8 +35,8 @@ public class MemberCenter {
         for (Members listMember : memberlist) {
             // id중복체크
             String searchKey = "";
-            if (element.equals("id"))
-                searchKey = listMember.getId();
+            if (element.equals("memberId"))
+                searchKey = listMember.getMemberId();
             if (element.equals("name"))
                 searchKey = listMember.getName();
             if (element.equals("phonnumber"))
@@ -49,12 +49,12 @@ public class MemberCenter {
 
     /**
      * 아이디로 회원을 찾는다.
-     * @param id 회원 아이디
+     * @param memberId 회원 아이디
      * @return 회원을 찾았다면 회원 객체를 리턴하고, 찾지 못했다면 null 을 리턴한다.
      */
-    public Members findByID(String id) {
+    public Members findByMemberID(String memberId) {
         for (Members member : memberlist) {
-            if (id.equals(member.getId())) {
+            if (memberId.equals(member.getMemberId())) {
                 return member;
             }
         }
@@ -69,9 +69,9 @@ public class MemberCenter {
         return search("phonnumber", phonnumber);
     }
 
-    public boolean remove(String id) {
+    public boolean remove(String memberId) {
         for (Members member : memberlist) {
-            if (id.equals(member.getId())) {
+            if (memberId.equals(member.getMemberId())) {
                 memberlist.remove(member);
                 return true;
             }

@@ -50,7 +50,7 @@ public class BookMenuForUser {
                 booksearch.search();
             }else if(("3").equals(inputMenu.getMenuCode()))
             {
-                br.getUserBorrowList();
+                System.out.println(br.getUserBorrowList());
             }else if(("4").equals(inputMenu.getMenuCode()))
             {
                 ReturnBook returnBook=new ReturnBook(br,lc);

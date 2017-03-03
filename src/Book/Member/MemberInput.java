@@ -35,10 +35,10 @@ public class MemberInput {
                 InputMenu inputMenu2 = input.getInputMenu();
                 System.out.println(inputMenu2.getMenuCode());
 
-                Members memberId = mc.findByID(inputMenu2.getMenuCode());
+                Members memberId = mc.findByMemberID(inputMenu2.getMenuCode());
 
                 if (memberId==null) {
-                    members.setId(inputMenu2.getMenuCode());
+                    members.setMemberId(inputMenu2.getMenuCode());
                     System.out.println("사용가능한 아이디 입니다.");
                     break;
                 } else

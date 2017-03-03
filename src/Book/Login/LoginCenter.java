@@ -26,12 +26,14 @@ public class LoginCenter {
     public LoginInfo getLoginInfo(){
         return loginInfo;
     }
+    //회원아이디로 찾는다
+    public String getLoginMemberId(){return loginInfo.getLoginId();}
 
     //로그인이 되게 한다.
-    public boolean login(String id,String pw){
+    public boolean login(String memberId,String pw){
         // 회원장부를 가져온다.
         //장부랑 id랑 비교해서 없으면 실패(고유한값)
-        Members member =mc.findByID(id);
+        Members member =mc.findByMemberID(memberId);
         if(member==null){
             return false;
         }
@@ -41,7 +43,7 @@ public class LoginCenter {
         }
         //로그인성공의 권한부여
         loginInfo.setLogin(true);
-        loginInfo.setLoginId(id);
+        loginInfo.setLoginId(memberId);
         return true;
     }
 }
