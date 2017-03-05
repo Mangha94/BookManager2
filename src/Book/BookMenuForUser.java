@@ -4,6 +4,7 @@ import Book.BookAPL.BookCenter;
 import Book.BookAPL.BookSearch;
 import Book.Borrow.BorrowBook;
 import Book.Borrow.BorrowCenter;
+import Book.Borrow.MoneyCenter;
 import Book.Borrow.ReturnBook;
 import Book.Login.LoginCenter;
 import Book.Login.LoginInfo;
@@ -15,6 +16,7 @@ public class BookMenuForUser {
     BookCenter bc;
     LoginCenter lc;
     BorrowCenter br;
+    MoneyCenter moneyCenter;
     public BookMenuForUser(BookCenter bc,LoginCenter lc){
         this.bc=bc;
         this.lc=lc;
