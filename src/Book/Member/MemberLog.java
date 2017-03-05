@@ -17,7 +17,7 @@ public class MemberLog {
 
         public void memberLog(Members member){
 
-            int cnt=0;
+            int cnt=1;
 
             Date date =new Date();
 
@@ -30,9 +30,7 @@ public class MemberLog {
                 }
             }
 
-            ++cnt;
-
-            member.setLog(""+df.format(date)+ String.format(("0000%d"),cnt));
+            member.setMemberNum (""+df.format(date)+ String.format(("0000%d"),cnt));
         }
     }
 

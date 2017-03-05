@@ -17,21 +17,14 @@ INSERT INTO books (id,title,writer,publisher,price,classification,regDate,rented
 INSERT INTO books (id,title,writer,publisher,price,classification,regDate,rented) VALUES ('0004' , '겨울왕국', '월트 디즈니', '디즈니', 1500, '동화', NOW(), false);
 INSERT INTO books (id,title,writer,publisher,price,classification,regDate,rented) VALUES ('0005' , '라푼젤', '월트 디즈니', '디즈니', 9000, '동화', NOW(), false);
 
-private String name;
-    private String memberId;
-    private String phonnumber;
-    private String birthday;
-    private Date regDate;
-    private String log;
-    private String pw;
-
-
 
 CREATE TABLE members (
   memberId varchar(30) NOT NULL PRIMARY KEY,
+  name varchar(100),
   phonnumber varchar(255) DEFAULT NULL,
   birthday varchar(50) DEFAULT NULL,
   regDate DATETIME,
-  pw varchar(60) DEFAULT NULL
+  pw varchar(60) DEFAULT NULL,
+  memberNum VARCHAR(50)
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

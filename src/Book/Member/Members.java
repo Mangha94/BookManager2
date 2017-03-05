@@ -1,5 +1,7 @@
 package Book.Member;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
 
 /**
@@ -11,8 +13,23 @@ public class Members {
     private String phonnumber;
     private String birthday;
     private Date regDate;
-    private String log;
+    private String memberNum;
     private String pw;
+
+    public Members(){}
+
+    public Members (ResultSet rs) throws SQLException
+    {
+        name = rs.getString ("name");
+        memberId = rs.getString ("memberId");
+        phonnumber = rs.getString ("phonnumber");
+
+        birthday = rs.getString ("birthday");
+        pw = rs.getString ("pw");
+        memberNum = rs.getString ("memberNum");
+        regDate = rs.getDate ("regDate");
+
+    }
 
     public String getPw() {
         return pw;
@@ -22,7 +39,7 @@ public class Members {
         this.pw = pw;
     }
 
-    public Members(){}
+
 
     public String getName() {return name;}
 
@@ -44,12 +61,20 @@ public class Members {
 
     public void setRegDate(Date regDate) {this.regDate = regDate;}
 
-    public void setLog(String log){this.log=log;}
+    public String getMemberNum ()
+    {
+        return memberNum;
+    }
+
+    public void setMemberNum (String memberNum)
+    {
+        this.memberNum = memberNum;
+    }
 
     public String toString()
     {
         return "["
-                +log
+                +memberNum
                 +"이름 : " +name
                 +" 아이디 : "+memberId
                 +" 연락처 : "+phonnumber

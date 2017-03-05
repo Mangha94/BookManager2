@@ -1,7 +1,12 @@
 package Book.Member;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+
+import Book.DB.BookManageDB;
 
 /**
  * 회원 관련 장부 생성 클래스
@@ -12,6 +17,8 @@ public class MemberCenter {
     //todo 싱글턴(인스턴스)
     private List<Members> memberlist;
 
+    BookManageDB bookManageDB = new BookManageDB ();
+
     MemberLog ml;
 
     public MemberCenter() {
@@ -20,17 +27,66 @@ public class MemberCenter {
     }
 
     public List<Members> getMembers() {
-        List<Members> copyMembers = new ArrayList<>(memberlist);
-        return copyMembers;
+
+        List<Members> list = new ArrayList<>();
+        try
+        {
+            Connection conn = bookManageDB.makeConnect ();
+
+            String sql = "select * from members";                        // sql 쿼리
+            PreparedStatement pStmt = conn.prepareStatement (sql);// prepareStatement에서 해당 sql을 미리 컴파일한다.
+            // pStmt.setString (1, "test");
+
+            ResultSet rs = pStmt.executeQuery ();// 쿼리를 실행하고 결과를 ResultSet 객체에 담는다.
+
+            while (rs.next ())
+            {                                                        // 결과를 한 행씩 돌아가면서 가져온다.
+                list.add (new Members (rs));
+            }
+
+            rs.close ();
+
+            conn.close ();
+
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace ();
+        }
+
+
+        return list;
     }
 
     public void addMembers(Members member)
 
     {
-
         ml.memberLog(member);
-        memberlist.add(member);
 
+        try
+        {
+            Connection conn = bookManageDB.makeConnect ();
+
+            String sql = "INSERT INTO members (memberId,phonnumber,birthday,regDate,pw,memberNum, name) VALUES (? ,? ,? ,? ,? , ?, ?)";        // sql 쿼리
+            PreparedStatement pstmt = conn.prepareStatement(sql);                          // prepareStatement에서 해당 sql을 미리 컴파일한다.
+            pstmt.setString(1,member.getMemberId ());
+            pstmt.setString(2,member.getPhonnumber ());
+            pstmt.setString(3,member.getBirthday ());
+            pstmt.setDate (4, new java.sql.Date (member.getRegDate ().getTime ()));    // 현재 날짜와 시간
+
+            pstmt.setString(5, member.getPw ());
+            pstmt.setString(6, member.getMemberNum ());
+            pstmt.setString(7, member.getName ());
+
+            pstmt.executeUpdate();                                        // 쿼리를 실행한다.
+
+            conn.close ();
+
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace ();
+        }
     }
 
     public List<Members> search(String element, String keyWord) {
@@ -55,13 +111,36 @@ public class MemberCenter {
      * @param memberId 회원 아이디
      * @return 회원을 찾았다면 회원 객체를 리턴하고, 찾지 못했다면 null 을 리턴한다.
      */
-    public Members findByMemberID(String memberId) {
-        for (Members member : memberlist) {
-            if (memberId.equals(member.getMemberId())) {
-                return member;
+    public Members findByMemberID(String memberId)
+    {
+        Members returnVal = null;
+
+        try
+        {
+            Connection conn = bookManageDB.makeConnect ();
+
+            String sql = "select * from members where memberId=?";                        // sql 쿼리
+            PreparedStatement pStmt = conn.prepareStatement (sql);// prepareStatement에서 해당 sql을 미리 컴파일한다.
+            pStmt.setString (1, memberId);
+
+            ResultSet rs = pStmt.executeQuery ();// 쿼리를 실행하고 결과를 ResultSet 객체에 담는다.
+
+            if (rs.next ())
+            {                                                        // 결과를 한 행씩 돌아가면서 가져온다.
+                returnVal = new Members (rs);
             }
+
+            rs.close ();
+
+            conn.close ();
+
         }
-        return null;
+        catch(Exception ex)
+        {
+            ex.printStackTrace ();
+        }
+
+        return returnVal;
     }
 
     public List<Members> findByName(String name) {
@@ -72,13 +151,29 @@ public class MemberCenter {
         return search("phonnumber", phonnumber);
     }
 
-    public boolean remove(String memberId) {
-        for (Members member : memberlist) {
-            if (memberId.equals(member.getMemberId())) {
-                memberlist.remove(member);
-                return true;
-            }
+    public boolean remove(String memberId)
+    {
+        try
+        {
+            Connection conn = bookManageDB.makeConnect ();
+
+            String sql = "DELETE FROM members WHERE memberId=?";        // sql 쿼리
+            PreparedStatement pstmt = conn.prepareStatement(sql);                          // prepareStatement에서 해당 sql을 미리 컴파일한다.
+            pstmt.setString(1,memberId);
+
+            pstmt.executeUpdate();                                        // 쿼리를 실행한다.
+
+            conn.close ();
+
+            return true;
+
         }
-        return false;
+        catch(Exception ex)
+        {
+            ex.printStackTrace ();
+
+            return false;
+        }
+
     }
 }
