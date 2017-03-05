@@ -12,8 +12,11 @@ public class MemberCenter {
     //todo 싱글턴(인스턴스)
     private List<Members> memberlist;
 
+    MemberLog ml;
+
     public MemberCenter() {
         memberlist = new ArrayList<>();
+        ml = new MemberLog(this);
     }
 
     public List<Members> getMembers() {
@@ -24,7 +27,7 @@ public class MemberCenter {
     public void addMembers(Members member)
 
     {
-        MemberLog ml = new MemberLog();
+
         ml.memberLog(member);
         memberlist.add(member);
 

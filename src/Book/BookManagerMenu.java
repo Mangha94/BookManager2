@@ -12,9 +12,10 @@ public class BookManagerMenu {
     BookCenter bc;
     MemberCenter mc;
     LoginCenter lc;
-    public BookManagerMenu(BookCenter bc, LoginCenter lc){
+    public BookManagerMenu(BookCenter bc, LoginCenter lc, MemberCenter mc){
         this.bc=bc;
         this.lc=lc;
+        this.mc = mc;
     }
     public void managerMenu() {
         while (true) {

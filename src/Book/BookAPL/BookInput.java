@@ -43,7 +43,7 @@ public class BookInput {
             System.out.println("가격을 입력해주세요");
             Inputclass inputPrice = new Inputclass();
             InputMenu inputMenu4 = inputPrice.getInputMenu();
-            book.setPrice(inputMenu4.getMenuCode());
+            book.setPrice(Integer.parseInt (inputMenu4.getMenuCode()));
 
             //분류를 입력받아 books 리스트에 넣는다
             System.out.println("분류을 입력해주세요");

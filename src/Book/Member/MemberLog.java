@@ -10,19 +10,28 @@ import java.util.Date;
 public class MemberLog {
         MemberCenter mc;
         DateFormat df = new SimpleDateFormat("yyyyMMdd");
-        int cnt=0;
-        Date date =new Date();
 
-        public void MemberLog(MemberCenter mc){
+        public MemberLog(MemberCenter mc){
             this.mc=mc;
         }
 
         public void memberLog(Members member){
+
+            int cnt=0;
+
+            Date date =new Date();
+
             member.setRegDate(date);
 
-            if(df.format (member.getRegDate()).equals(df.format(date))){
-                ++cnt;
+            for (Members m : mc.getMembers ())
+            {
+                if(df.format (m.getRegDate()).equals(df.format(date))){
+                    ++cnt;
+                }
             }
+
+            ++cnt;
+
             member.setLog(""+df.format(date)+ String.format(("0000%d"),cnt));
         }
     }

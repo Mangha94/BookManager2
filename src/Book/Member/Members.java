@@ -53,7 +53,8 @@ public class Members {
                 +"이름 : " +name
                 +" 아이디 : "+memberId
                 +" 연락처 : "+phonnumber
-                +" 생년월일 "+birthday
+                +" 생년월일 : "+birthday
+                  +" 등록일 : "+regDate
                 +"\n]";
     }
 

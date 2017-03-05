@@ -1,5 +1,7 @@
 package Book.BookAPL;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
 
 /**
@@ -9,7 +11,7 @@ public class Books {
     private String title;
     private String writer;
     private String publisher;
-    private String price;
+    private int price;
     private String classification;
     private String id;
     private Date regDate;
@@ -18,12 +20,27 @@ public class Books {
     //북 초기화
     public Books(){}
 
+    public Books (ResultSet rs) throws SQLException
+    {
+        id = rs.getString ("id");
+        title = rs.getString ("title");
+        writer = rs.getString ("writer");
+
+        publisher = rs.getString ("publisher");
+        price = rs.getInt ("price");
+        classification = rs.getString ("classification");
+        rented = rs.getBoolean ("rented");
+
+        regDate = rs.getDate ("regDate");
+
+    }
+
     public void books(){
-        Books book1=new Books();
+        /*Books book1=new Books();
         setId("0001");
         setPublisher("디즈니");
         setClassification("동화");
-        setPrice("1000");
+        setPrice(1000);
         setTitle("백설공주");
         setWriter("월트 디즈니");
 
@@ -31,9 +48,9 @@ public class Books {
         setId("0002");
         setPublisher("디즈니");
         setClassification("동화");
-        setPrice("2000");
+        setPrice(2000);
         setTitle("신데렐라");
-        setWriter("월트 디즈니");
+        setWriter("월트 디즈니");*/
 
     }
 
@@ -70,11 +87,13 @@ public class Books {
         this.publisher = publisher;
     }
 
-    public String getPrice() {
+    public int getPrice ()
+    {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice (int price)
+    {
         this.price = price;
     }
 

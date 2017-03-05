@@ -24,7 +24,7 @@ public class BookManagerLogin {
 
         mi = new MemberInput(mc);
         bmf= new BookMenuForUser(bc,lc);
-        bmm=new BookManagerMenu(bc,lc);
+        bmm=new BookManagerMenu(bc,lc, mc);
     }
 
 

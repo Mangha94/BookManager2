@@ -1,6 +1,16 @@
 package Book.BookAPL;
 
-import java.util.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import Book.DB.BookManageDB;
 
 /**
  * 책 장부를 구성한다
@@ -12,6 +22,8 @@ public class BookCenter
     private List<Books> booklist;
     private HashMap bookmap;
     BookIdAdd IdAdd=new BookIdAdd();
+
+    BookManageDB bookManageDB = new BookManageDB ();
 
 
     /**
@@ -34,7 +46,7 @@ public class BookCenter
 
     }
     public void books(){
-        Books book1=new Books();
+        /*Books book1=new Books();
         book1.setId("0001");
         book1.setPublisher("디즈니");
         book1.setClassification("동화");
@@ -52,7 +64,7 @@ public class BookCenter
         book2.setRented(false);
         book2.setTitle("신데렐라");
         book2.setWriter("월트 디즈니");
-        booklist.add(book2);
+        booklist.add(book2);*/
 
     }
 
@@ -62,8 +74,34 @@ public class BookCenter
      */
     public List<Books> getBooks()
     {
-        List<Books> copyBooks=  new ArrayList<>(booklist);
-        return copyBooks;
+        List<Books> list = new ArrayList<>();
+        try
+        {
+            Connection conn = bookManageDB.makeConnect ();
+
+            String sql = "select * from Books";                        // sql 쿼리
+            PreparedStatement pStmt = conn.prepareStatement (sql);// prepareStatement에서 해당 sql을 미리 컴파일한다.
+            // pStmt.setString (1, "test");
+
+            ResultSet rs = pStmt.executeQuery ();// 쿼리를 실행하고 결과를 ResultSet 객체에 담는다.
+
+            while (rs.next ())
+            {                                                        // 결과를 한 행씩 돌아가면서 가져온다.
+                list.add (new Books (rs));
+            }
+
+            rs.close ();
+
+            conn.close ();
+
+        }
+         catch(Exception ex)
+         {
+         }
+
+
+
+        return list;
     }
 
     /**
