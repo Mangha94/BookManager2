@@ -9,7 +9,25 @@ import java.util.Date;
 public class Moneys {
     private String delinquent;
     private int lateMoney;
-    private int totalMoney;
+    private long totalMoney;
+
+    private Date payDay;
+
+    /*public Moneys(){
+        delinquent="";
+        lateMoney=0;
+        totalMoney=0;
+    }*/
+
+    public Moneys (Borrows borrows)
+    {
+        setDelinquent(borrows.getBorrwer());
+        setLateMoney(borrows.getOverDuePrice());
+        setPayDay(new Date());
+
+        totalMoney=0;
+    }
+
 
     public String getDelinquent() {
         return delinquent;
@@ -27,11 +45,11 @@ public class Moneys {
         this.lateMoney = lateMoney;
     }
 
-    public int getTotalMoney() {
+    public long getTotalMoney() {
         return totalMoney;
     }
 
-    public void setTotalMoney(int totalMoney) {
+    public void setTotalMoney(long totalMoney) {
         this.totalMoney = totalMoney;
     }
 
@@ -43,13 +61,7 @@ public class Moneys {
         this.payDay = payDay;
     }
 
-    private Date payDay;
 
-    public Moneys(){
-        delinquent="";
-        lateMoney=0;
-        totalMoney=0;
-    }
     public String toString()
     {
         return "[납부자='"+delinquent+'\''+

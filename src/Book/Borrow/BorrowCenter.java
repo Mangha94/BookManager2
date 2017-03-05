@@ -1,14 +1,14 @@
 package Book.Borrow;
 
-import Book.BookAPL.BookCenter;
-import Book.BookAPL.Books;
-import Book.Login.LoginCenter;
-import Book.Login.LoginInfo;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import Book.BookAPL.BookCenter;
+import Book.BookAPL.Books;
+import Book.Login.LoginCenter;
+import Book.Login.LoginInfo;
 
 /**
  * 대여관련 메소드 집합체
@@ -19,11 +19,14 @@ public class BorrowCenter {
     LoginInfo loginInfo;
     private List<Borrows> borrowList;
 
+    private MoneyCenter moneyCenter;
+
     public BorrowCenter(BookCenter bc,LoginCenter lc){
         this.bc=bc;
         this.lc=lc;
         loginInfo=lc.getLoginInfo();
         borrowList=new ArrayList<>();
+        moneyCenter = new MoneyCenter();
     }
     /**
      * id로 찾아서 대여장부에 추가
@@ -88,6 +91,33 @@ public class BorrowCenter {
             }
         }
         return borrowUserBookList;
+    }
+
+    /**
+     * 연체료를 받는다.
+     * @param borrows 대여
+     * @return 성공 여부
+     */
+    public boolean recvOverduePrice (Borrows borrows)
+    {
+        if (!borrows.getBorrwer().equals(lc.getLoginInfo().getLoginId()))
+            return false;
+
+        // 연체가 아니기 때문에 처리 하지 않는다., 이미 연체료를 받았기 때문에 처리 하지 않는다.
+        if(!borrows.isOverDue() || borrows.isRecvOverDue ())
+            return false;
+
+        // 연체료 반납 로직 처리 Start
+
+        // 대여료를 받았음
+        borrows.setRecvOverDue (true);
+
+        moneyCenter.addMoney (new Moneys(borrows));
+
+        // 연체료 반납 로직 처리 End
+
+
+        return true;
     }
 
     /**
